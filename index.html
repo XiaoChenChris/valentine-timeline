@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的爱情故事</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .welcome {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at center, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+        }
+
+        .welcome-top {
+            font-size: 1.5rem;
+            color: rgba(255, 184, 198, 0.8);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .welcome-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ffd1dc, #ff6b9d, #c44569, #ff6b9d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 4s ease infinite, fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+            text-shadow: 0 0 60px rgba(255, 107, 157, 0.5);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3rem;
+            color: #ffb8c6;
+            max-width: 600px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #ff6b9d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #ffb8c6;
+            margin-bottom: 30px;
+        }
+
+        .love-counter {
+            background: rgba(255, 107, 157, 0.1);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            border-radius: 20px;
+            padding: 30px 50px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .love-counter .label {
+            font-size: 1.2rem;
+            color: #ffb8c6;
+            margin-bottom: 10px;
+        }
+
+        .love-counter .counter {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 3rem;
+            color: #ff6b9d;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint span {
+            display: block;
+            font-size: 2rem;
+            color: #ff6b9d;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .timeline {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b9d, #c44569, #ff6b9d);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 50px);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 50px);
+            text-align: left;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            border-radius: 50%;
+            border: 4px solid #1a1a2e;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: #ffb8c6;
+            margin-bottom: 15px;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff6b9d33, #c4456933);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffb8c6;
+            font-size: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-image:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to top, rgba(255, 107, 157, 0.1), transparent);
+        }
+
+        .footer h2 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+        }
+
+        .footer-subtitle {
+            color: #ffb8c6;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .footer-credit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 107, 157, 0.2);
+        }
+
+        .credit-text {
+            color: rgba(255, 184, 198, 0.7);
+            font-size: 1rem;
+        }
+
+        .credit-name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #ff6b9d, #ffd1dc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .heart-icon {
+            color: #ff6b9d;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .firework-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 24px;
+            opacity: 0;
+            transition: all 1.2s ease-out;
+        }
+
+        .trail-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9997;
+            font-size: 16px;
+            animation: trailFade 1s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3) translateY(-30px);
+            }
+        }
+
+        .meteor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 200, 220, 0.6));
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.5), 0 0 20px rgba(255, 107, 157, 0.3);
+            animation: meteorFall 1.5s linear forwards;
+            transform: rotate(-45deg);
+        }
+
+        .meteor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px rgba(255, 107, 157, 0.8);
+        }
+
+        @keyframes meteorFall {
+            0% {
+                opacity: 1;
+                transform: rotate(-45deg) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(-45deg) translateY(100vh);
+            }
+        }
+
+        .click-ripple {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.8) 0%, transparent 70%);
+            animation: rippleExpand 0.6s ease-out forwards;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(8);
+                opacity: 0;
+            }
+        }
+
+        .special-dot {
+            width: 30px;
+            height: 30px;
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.8);
+        }
+
+        .flower {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: flowerFall 3s ease-out forwards;
+        }
+
+        @keyframes flowerFall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .valentine-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 120px;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8),
+                         0 0 40px rgba(255, 107, 157, 0.6),
+                         0 0 60px rgba(255, 107, 157, 0.4);
+            z-index: 10000;
+            animation: valentineText 3s ease-out forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes valentineText {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            40% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+
+            .timeline::before { left: 20px; }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 20px;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .timeline-dot { left: 20px; }
+
+            .timeline-content { max-width: 100%; }
+
+            .valentine-text {
+                font-size: 60px;
+            }
+
+            .music-player {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .music-player button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .music-player button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-player button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.7);
+        }
+
+        .music-player button.playing {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(255, 107, 157, 0.5);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(255, 107, 157, 0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <div class="music-player">
+        <button id="musicBtn" title="播放音乐">🎵</button>
+    </div>
+
+    <section class="welcome">
+        <p class="welcome-top">欢迎来到</p>
+        <h1 class="welcome-title">Chris 的 Web</h1>
+        <p class="welcome-subtitle">在这个特殊的日子里，Chris想给你别样的一种体验</p>
+        <div class="scroll-hint">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <section class="hero">
+        <h1>我们的故事</h1>
+        <p class="subtitle">从添加好友的那一晚开始...</p>
+        <div class="love-counter">
+            <div class="label">我们已经相识</div>
+            <div class="counter" id="loveCounter">计算中...</div>
+        </div>
+        <div class="scroll-hint">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <section class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.13 周四</span>
+                <h3 class="timeline-title">缘分的开始</h3>
+                <div class="timeline-image"><img src="1113.jpg" alt="图书馆相见"></div>
+                <p class="timeline-desc">晚上9点29分，我们添加了好友。那一刻，我还不知道这个决定会改变我的接下来的生活...</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.16 周日</span>
+                <h3 class="timeline-title">第一次一起吃饭</h3>
+                
+                <p class="timeline-desc">中午，我从图书馆追你到二食堂三楼...你当时略带生气的走路的样子现在还刻在我脑海中哈哈</p>
+            </div>
+        </div>
+
+         <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.17 周一</span>
+                <h3 class="timeline-title">发你我的课表</h3>
+                <div class="timeline-image"><img src="1118发送我的课表.jpg" alt="发送我的课表"></div>
+                <p class="timeline-desc">把课表发你，内心戏就是要你在我有空的时候可以找我...</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.20 周四</span>
+                <h3 class="timeline-title">小教室的相遇</h3>
+                <div class="timeline-image"><img src="1120小教室相遇.jpg" alt="图书馆相见"></div>
+                <p class="timeline-desc">小教室里，你坐在我的后面。我努力不让自己分心，思绪却总是在你。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.21 周五</span>
+                <h3 class="timeline-title">交换联系方式</h3>
+                <div class="timeline-image"><img src="1121.jpg" alt="图书馆相见"></div>
+                <p class="timeline-desc">我给你我的手机号。你给我打了电话。带着倔强，和我诉说。那一刻，我想紧紧把你拥入怀中。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.11.29 周六</span>
+                <h3 class="timeline-title">新生赛</h3>
+                <div class="timeline-image"><img src="1129新生赛.jpg" alt="新生赛"></div>
+                <p class="timeline-desc">我参加了新生赛，你在市区。虽然你不在身边，但我心里却一直惦记着你。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot special-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.03 周三</span>
+                <h3 class="timeline-title">✨ 在一起</h3>
+                
+                <p class="timeline-desc">你靠在我身上，我自发地轻轻地抱住你。从那一刻起，我们在一起了。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.06 周六</span>
+                <h3 class="timeline-title">温馨的下午</h3>
+                <div class="timeline-image"><img src="1206第一次酒店.jpg" alt="温馨的下午"></div>
+                <p class="timeline-desc">美好的周六我和你一个下午都在一块，你向我诉说明天要去上海市公务员考试。那天晚上，意外地，我们第一次一起去酒店。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.08 周一</span>
+                <h3 class="timeline-title">守护你</h3>
+                <div class="timeline-image"><img src="1208一起去医院.jpg" alt="守护你"></div>
+                <p class="timeline-desc">你在帮行政老师处理事物，晚上10点20，得知你不舒服，我便跑去找你。我们一起去了医院。你当时在医院斜靠在我肩膀上，说：“我不想麻烦别人，但是就是想麻烦你”</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.14 周日</span>
+                <h3 class="timeline-title">游泳馆之约</h3>
+                <div class="timeline-image"><img src="1210亲她.jpg" alt="游泳馆之约"></div>
+                <p class="timeline-desc">周日我们又在一起腻歪啦，我们一块去了游泳馆。和你在一起总是那么甜蜜。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.17 周三</span>
+                <h3 class="timeline-title">矛盾初现</h3>
+                <div class="timeline-image"><img src="1217微信电话.jpg" alt="矛盾初现"></div>
+                <p class="timeline-desc">积攒的矛盾开始显露，你微信电话中透露出自己忘记了约定后...我们开始学会面对问题。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.18 周四</span>
+                <h3 class="timeline-title">闵行之行</h3>
+                <div class="timeline-image"><img src="1218她去闵行玩.jpg" alt="闵行之行"></div>
+                <div class="timeline-image"><img src="1218她去闵行玩2.jpg" alt="闵行之行"></div>
+                <div class="timeline-image"><img src="1218晚上去见她.jpg" alt="闵行之行"></div>
+                <p class="timeline-desc">你告诉我你去了闵行的一个商场。虽然只是日常，但是知道你的行程让我安心。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.19 周五</span>
+                <h3 class="timeline-title">佘山之约</h3>
+                <div class="timeline-image"><img src="1219讨论一起去佘山.jpg" alt="佘山之约"></div>
+                <p class="timeline-desc">我们商量了周六一起去佘山。期待着和你一起看风景。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.20 周六</span>
+                <h3 class="timeline-title">心疼的夜晚</h3>
+                <div class="timeline-image"><img src="1220晚上去地铁站接她.jpg" alt="心疼的夜晚"></div>
+                <p class="timeline-desc">中午，我说的话伤害了你。晚上，在你的提醒下，我赶去了地铁站，我们一块回到南门，一向情绪稳定的你那天晚上哭了。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.21 周日</span>
+                <h3 class="timeline-title">温暖的关心</h3>
+                <div class="timeline-image"><img src="1221晚上送她去地铁站.jpg" alt="温暖的关心"></div>
+                <p class="timeline-desc">晚上送你去地铁站，我坐3路公交回去，天很冷，我等车等了许久。你叫我回去喝热水，截图为证。你的关心，温暖了整个冬天。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.22 周一</span>
+                <h3 class="timeline-title">深夜的和解</h3>
+                <div class="timeline-image"><img src="1222矛盾爆发.jpg" alt="深夜的和解"></div>
+                <p class="timeline-desc">上周三积攒的矛盾爆发，晚上，我来找你...半个多小时，接近了12点，我回到宿舍....</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.25 周四</span>
+                <h3 class="timeline-title">圣诞节的温暖</h3>
+                <div class="timeline-image"><img src="1225圣诞.jpg" alt="圣诞节的温暖"></div>
+                <p class="timeline-desc">圣诞，我们相约在红跑车。我们一起去了酒店，在一个温暖安静的环境里，讨论了积攒的矛盾。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2025.12.27 周六</span>
+                <h3 class="timeline-title">机场送别</h3>
+                <div class="timeline-image"><img src="1227机场.jpg" alt="机场送别"></div>
+                <p class="timeline-desc">送你去机场，机场凌晨的天空，迷路的我，也是别样的风味。和你在一起的每一刻，都是特别的回忆。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.02 周四</span>
+                <h3 class="timeline-title">关于独立</h3>
+                <div class="timeline-image"><img src="0102让她写恋爱日记.jpg" alt="关于独立"></div>
+                <div class="timeline-image"><img src="0102p1.jpg" alt="关于独立"></div>
+                <p class="timeline-desc">你讨论了独立，需要与不需要。提出我"了解"动作做的不够多。我在学着更好地爱你。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.03 周五</span>
+                <h3 class="timeline-title">图书馆相见</h3>
+                <div class="timeline-image"><img src="0103p11.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p22.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p33.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p44.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p55.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p6.jpg" alt="图书馆相见"></div>
+                <div class="timeline-image"><img src="0103p7.jpg" alt="图书馆相见"></div>
+                <p class="timeline-desc">你状态不好，学不下去。我们又在图书馆见面啦。陪着你，就是最好的安排。ps这天是一个月纪念日哈哈，月亮很圆</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.04 周六</span>
+                <h3 class="timeline-title">惹你生气了</h3>
+                                <div class="timeline-image"><img src="0104p1.jpg" alt="图书馆相见"></div>
+                                <div class="timeline-image"><img src="0104p2.jpg" alt="图书馆相见"></div>
+                                <div class="timeline-image"><img src="0104p3.jpg" alt="图书馆相见"></div>
+                                <div class="timeline-image"><img src="0104p4.jpg" alt="图书馆相见"></div>
+                                <div class="timeline-image"><img src="0104p5.jpg" alt="图书馆相见"></div>
+                                <div class="timeline-image"><img src="0104p6.jpg" alt="图书馆相见"></div>
+
+                <p class="timeline-desc">我在你状态不好的情况下，又惹你生气了。我真是情商为负数，呜呜呜，我会更注意你的感受的！</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot special-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.07 周二</span>
+                <h3 class="timeline-title">🎂 你的生日</h3>
+                <div class="timeline-image"><img src="0107生日照片.jpg" alt="你的生日"></div>
+                <div class="timeline-image"><img src="0107生日晚饭2.jpg" alt="你的生日"></div>
+                <div class="timeline-image"><img src="0107生日照片2.jpg" alt="你的生日"></div>
+                  <p class="timeline-desc">晚上，我和你一起度过你的生日。愿你每一岁都快乐，愿我每年都能陪你过生日。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.08 周五</span>
+                <h3 class="timeline-title">印象城晚餐</h3>
+                
+                <p class="timeline-desc">我们又一块去印象城吃晚饭啦。那天我一个很强烈的感受就是，和你一起吃饭，真的真的真的有点点幸福。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.11 周一</span>
+                <h3 class="timeline-title">图书馆二楼</h3>
+                 <p class="timeline-desc">图书馆的二楼相见。平淡的日子，因为有你在而闪闪发光。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.12 周二</span>
+                <h3 class="timeline-title">图书馆见面</h3>
+                 <p class="timeline-desc">图书馆见面。每天见到你，是我最期待的事。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.13 周三</span>
+                <h3 class="timeline-title">期末考试</h3>
+                <div class="timeline-image"><img src="0113p1.jpg" alt="期末考试"></div>
+                <div class="timeline-image"><img src="0113p2.jpg" alt="期末考试"></div>
+                <div class="timeline-image"><img src="0113p3.jpg" alt="期末考试"></div>
+                 <p class="timeline-desc">这天一场结课考，考完下午5点，我又没忍住去找你了，虽然我嘴上说着不想见面了，怕见面了就分不开。但是身体上还是去北门找到刚刚拿外卖的你.....</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.16 周五</span>
+                <h3 class="timeline-title">上财之行</h3>
+                <div class="timeline-image"><img src="0116上财回城的早上.jpg" alt="上财之行"></div>
+                <p class="timeline-desc">上财。陪你走过的每一个地方，都是我们的回忆。早上，你涂了口红吻我，其实我当时想多保留一会这个口红印的hh，当时真的很高兴呀。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.17 周六</span>
+                <h3 class="timeline-title">接你回去</h3>
+                <div class="timeline-image"><img src="投喂.jpg" alt="接你回去"></div>
+                 <p class="timeline-desc">晚上去给你买吃的，来图书馆接你回去。照顾你，是我的幸福。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.18 周日</span>
+                <h3 class="timeline-title">小Demo</h3>
+                <div class="timeline-image"><img src="0118demo桌面宠物.png" alt="小Demo"></div>
+                <p class="timeline-desc">我做了个小Demo桌面宠物送你，可惜Mac上没有适配。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.01.22 周四</span>
+                <h3 class="timeline-title">离别前一天</h3>
+                 <p class="timeline-desc">你回家的前一天我们一起在酒店。不舍得分开，期待下次相见。</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot special-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2026.02.14 周六</span>
+                <h3 class="timeline-title">💕 情人节快乐</h3>
+                 <p class="timeline-desc">今天是情人节，是我们在一起的第七十三天。未来的日子，我想继续和你一起度过。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h2>我们的故事，未完待续 <span class="heart-icon">❤</span></h2>
+        <p class="footer-subtitle">愿我们都能成为幸福的人和能带给他人幸福的人！</p>
+        <div class="footer-credit">
+            <span class="credit-text">Made with</span>
+            <span class="heart-icon">❤</span>
+            <span class="credit-text">by</span>
+            <span class="credit-name">Chris</span>
+        </div>
+    </footer>
+
+    <script>
+        function createHearts() {
+            const container = document.getElementById('heartsBg');
+            const hearts = ['❤', '💕', '💗', '💖', '💝'];
+            
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        function updateCounter() {
+            const startDate = new Date('2025-11-13');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('loveCounter').textContent = 
+                `${days} 天 ${hours} 小时 ${minutes} 分钟`;
+        }
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        const dateText = entry.target.querySelector('.timeline-date');
+                        if (dateText && dateText.textContent.includes('2026.02.14')) {
+                            triggerValentineEffect();
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            });
+
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        let valentineTriggered = false;
+
+        function triggerValentineEffect() {
+            if (valentineTriggered) return;
+            valentineTriggered = true;
+
+            const flowers = ['🌹', '🌸', '💐', '🌺', '🌷', '🌻', '🌼', '💮', '🏵️', '🌹'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower';
+                    flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                    flower.style.left = Math.random() * 100 + '%';
+                    flower.style.fontSize = (25 + Math.random() * 40) + 'px';
+                    flower.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+                    document.body.appendChild(flower);
+                    
+                    setTimeout(() => flower.remove(), 5000);
+                }, i * 20);
+            }
+
+            const valentineText = document.createElement('div');
+            valentineText.className = 'valentine-text';
+            valentineText.textContent = '情人节快乐';
+            document.body.appendChild(valentineText);
+            
+            setTimeout(() => valentineText.remove(), 3000);
+        }
+
+        createHearts();
+        updateCounter();
+        setInterval(updateCounter, 60000);
+        initScrollAnimations();
+        initFireworks();
+        initMouseTrail();
+        initMeteors();
+        initMusicPlayer();
+
+        function initMusicPlayer() {
+            const musicBtn = document.getElementById('musicBtn');
+            let isPlaying = false;
+            let audio = null;
+
+            musicBtn.addEventListener('click', function() {
+                if (!audio) {
+                    audio = new Audio('music.m4a');
+                    audio.loop = true;
+                    audio.volume = 0.5;
+                }
+
+                if (isPlaying) {
+                    audio.pause();
+                    musicBtn.textContent = '🎵';
+                    musicBtn.classList.remove('playing');
+                    isPlaying = false;
+                } else {
+                    audio.play().catch(function(error) {
+                        console.log('音乐播放失败:', error);
+                        alert('请将音乐文件命名为 "music.m4a" 或 "music.mp3" 并放在同一文件夹中');
+                    });
+                    musicBtn.textContent = '⏸️';
+                    musicBtn.classList.add('playing');
+                    isPlaying = true;
+                }
+            });
+        }
+
+        function initMeteors() {
+            setInterval(() => {
+                if (Math.random() > 0.3) {
+                    createMeteor();
+                }
+            }, 800);
+        }
+
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.className = 'meteor';
+            
+            const startX = Math.random() * (window.innerWidth + 300) - 150;
+            const startY = Math.random() * (window.innerHeight * 0.6) - 150;
+            
+            meteor.style.left = startX + 'px';
+            meteor.style.top = startY + 'px';
+            meteor.style.height = (100 + Math.random() * 80) + 'px';
+            meteor.style.width = (2 + Math.random() * 2) + 'px';
+            meteor.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+            
+            document.body.appendChild(meteor);
+            
+            setTimeout(() => meteor.remove(), 2000);
+        }
+
+        function initFireworks() {
+            document.addEventListener('click', function(e) {
+                createRipple(e.clientX, e.clientY);
+                createHeartFirework(e.clientX, e.clientY);
+            });
+        }
+
+        function initMouseTrail() {
+            const hearts = ['❤', '💕', '💗', '💖', '💝'];
+            const colors = ['#ff6b9d', '#ff8fab', '#ffb3c6', '#ffc2d1', '#ffd1dc'];
+            let lastTime = 0;
+            const throttleMs = 50;
+
+            document.addEventListener('mousemove', function(e) {
+                const now = Date.now();
+                if (now - lastTime < throttleMs) return;
+                lastTime = now;
+
+                const heart = document.createElement('div');
+                heart.className = 'trail-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = (12 + Math.random() * 10) + 'px';
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1000);
+            });
+        }
+
+        function createRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = (x - 10) + 'px';
+            ripple.style.top = (y - 10) + 'px';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        function createHeartFirework(x, y) {
+            const hearts = ['❤', '💕', '💗', '💖', '💝', '💘', '💞', '💓'];
+            const colors = ['#ff6b9d', '#ff8fab', '#ffb3c6', '#ffc2d1', '#ffd1dc', '#ff477e', '#ff85a1', '#fbb1bd'];
+            const particleCount = 12 + Math.floor(Math.random() * 8);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'firework-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                
+                const angle = (i / particleCount) * Math.PI * 2;
+                const velocity = 80 + Math.random() * 120;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity - 30;
+                
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+                heart.style.transform = 'translate(-50%, -50%) scale(1)';
+                heart.style.opacity = '1';
+                
+                document.body.appendChild(heart);
+                
+                requestAnimationFrame(() => {
+                    heart.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.5)`;
+                    heart.style.opacity = '0';
+                });
+                
+                setTimeout(() => heart.remove(), 1500);
+            }
+        }
+    </script>
+</body>
+</html>
